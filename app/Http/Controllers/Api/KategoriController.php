@@ -114,4 +114,18 @@ class KategoriController extends Controller
         //return response
         return new UkomResource(true, 'Data Kategori Berhasil Dihapus!', null);
     }
+
+    /**
+     * indexkategori
+     *
+     * @return void
+     */
+    public function indexkategori()
+    {
+        //get all kategoris
+        $kategoris = Kategori::latest()->get();
+
+        //return collection of posts as a resource
+        return new UkomResource(true, 'List Data Kategori', $kategoris);
+    }
 }

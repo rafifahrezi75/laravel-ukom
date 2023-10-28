@@ -23,4 +23,18 @@ class UserController extends Controller
         return new UkomResource(true, 'List Data User', $users);
     }
 
+    /**
+     * indexuser
+     *
+     * @return void
+     */
+    public function indexuser()
+    {
+        //get all users
+        $users = User::latest()->get();
+
+        //return collection of users as a resource
+        return new UkomResource(true, 'List Data User', $users);
+    }
+
 }

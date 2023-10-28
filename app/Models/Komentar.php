@@ -16,6 +16,8 @@ class Komentar extends Model
      */
     protected $fillable = [
         'idartikel',
+        'idkomen',
+        'aksi',
         'nama',
         'tglkomen',
         'statuskomen',

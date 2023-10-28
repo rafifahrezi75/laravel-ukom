@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('komentars', function (Blueprint $table) {
             $table->id();
             $table->integer('idartikel');
+            $table->integer('idkomen');
+            $table->integer('aksi');
             $table->string('nama');
             $table->date('tglkomen');
             $table->integer('statuskomen');

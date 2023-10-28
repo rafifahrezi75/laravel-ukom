@@ -198,4 +198,18 @@ class ArtikelController extends Controller
         //return collection of artikels as a resource
         return new UkomResource(true, 'List Data Artikel', $artikels);
     }
+
+    /**
+     * indexartikel1
+     *
+     * @return void
+     */
+    public function indexartikel1()
+    {
+        //get all artikels
+        $artikels = Artikel::latest()->join('kategoris', 'artikels.idkategori', '=', 'kategoris.id')->select(['artikels.*', 'kategoris.kategori'])->get();
+
+        //return collection of artikels as a resource
+        return new UkomResource(true, 'List Data Artikel', $artikels);
+    }
 }

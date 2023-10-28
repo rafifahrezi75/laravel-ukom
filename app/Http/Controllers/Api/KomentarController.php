@@ -35,6 +35,8 @@ class KomentarController extends Controller
         //define validation rules
         $validator = Validator::make($request->all(), [
             'idartikel'   => 'required',
+            'idkomen'   => 'required',
+            'aksi'   => 'required',
             'nama'   => 'required',
             'tglkomen'   => 'required',
             'statuskomen'   => 'required',
@@ -49,6 +51,8 @@ class KomentarController extends Controller
         //create komentar
         $komentar = Komentar::create([
             'idartikel'   => $request->idartikel,
+            'idkomen'   => $request->idkomen,
+            'aksi'   => $request->aksi,
             'nama'   => $request->nama,
             'tglkomen'   => $request->tglkomen,
             'statuskomen'   => $request->statuskomen,
@@ -122,5 +126,19 @@ class KomentarController extends Controller
 
         //return response
         return new UkomResource(true, 'Data Komentar Berhasil Dihapus!', null);
+    }
+
+    /**
+     * indexkomentar
+     *
+     * @return void
+     */
+    public function indexkomentar()
+    {
+        //get all kometars
+        $kometars = Komentar::all();
+
+        //return collection of kometars as a resource
+        return new UkomResource(true, 'List Data Komentar', $kometars);
     }
 }
