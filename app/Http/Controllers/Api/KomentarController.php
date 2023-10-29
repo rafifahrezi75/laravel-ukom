@@ -18,7 +18,7 @@ class KomentarController extends Controller
     public function index()
     {
         //get all kometars
-        $kometars = Komentar::latest()->paginate(5);
+        $kometars = Komentar::latest()->join('users', 'komentars.iduser', '=', 'users.id')->select(['komentars.*', 'users.name'])->paginate(5);
 
         //return collection of kometars as a resource
         return new UkomResource(true, 'List Data Komentar', $kometars);
@@ -37,7 +37,7 @@ class KomentarController extends Controller
             'idartikel'   => 'required',
             'idkomen'   => 'required',
             'aksi'   => 'required',
-            'nama'   => 'required',
+            'iduser'   => 'required',
             'tglkomen'   => 'required',
             'statuskomen'   => 'required',
             'komentar'   => 'required',
@@ -53,7 +53,7 @@ class KomentarController extends Controller
             'idartikel'   => $request->idartikel,
             'idkomen'   => $request->idkomen,
             'aksi'   => $request->aksi,
-            'nama'   => $request->nama,
+            'iduser'   => $request->iduser,
             'tglkomen'   => $request->tglkomen,
             'statuskomen'   => $request->statuskomen,
             'komentar'   => $request->komentar,
@@ -72,7 +72,7 @@ class KomentarController extends Controller
     public function show($id)
     {
         //find komentar by ID
-        $komentar = Komentar::find($id);
+        $komentar = Komentar::join('users', 'komentars.iduser', '=', 'users.id')->select(['komentars.*', 'users.name'])->find($id);
 
         //return single komentar as a resource
         return new UkomResource(true, 'Detail Data Komentar!', $komentar);
@@ -136,7 +136,7 @@ class KomentarController extends Controller
     public function indexkomentar()
     {
         //get all kometars
-        $kometars = Komentar::all();
+        $kometars = Komentar::join('users', 'komentars.iduser', '=', 'users.id')->select(['komentars.*', 'users.name'])->get();
 
         //return collection of kometars as a resource
         return new UkomResource(true, 'List Data Komentar', $kometars);

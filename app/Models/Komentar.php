@@ -18,7 +18,7 @@ class Komentar extends Model
         'idartikel',
         'idkomen',
         'aksi',
-        'nama',
+        'iduser',
         'tglkomen',
         'statuskomen',
         'komentar',

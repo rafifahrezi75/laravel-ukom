@@ -7,7 +7,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
-class LoginController extends Controller
+class LoginUserController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -29,7 +29,7 @@ class LoginController extends Controller
         }
 
         //get credentials from request
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('email', 'password', 'role');
 
         //if auth failed
         if(!$token = JWTAuth::attempt($credentials)) {
@@ -41,12 +41,12 @@ class LoginController extends Controller
 
         $user = auth()->user();
 
-        if ($user && $user->role === 'user') {
+        if ($user && $user->role === 'admin') {
             return response()->json([
                 'success' => false,
-                'message' => 'User is not allowed to login through this endpoint.'
+                'message' => 'Admin is not allowed to login through this endpoint.'
             ], 403);
-        };
+        }
 
         //if auth success
         if ($user->isAdmin()) {

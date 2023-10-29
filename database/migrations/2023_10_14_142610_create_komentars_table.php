@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('idartikel');
             $table->integer('idkomen');
             $table->integer('aksi');
-            $table->string('nama');
+            $table->integer('iduser');
             $table->date('tglkomen');
             $table->integer('statuskomen');
             $table->text('komentar');

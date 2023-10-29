@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\ArtikelController;
 use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\KomentarController;
+use App\Http\Controllers\Api\LikeController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', App\Http\Controllers\Api\RegisterController::class)->name('register');
 
 Route::post('/login', App\Http\Controllers\Api\LoginController::class)->name('login');
+Route::post('/loginuser', App\Http\Controllers\Api\LoginUserController::class)->name('loginuser');
 
 Route::post('/logout', App\Http\Controllers\Api\LogoutController::class)->name('logout');
 
@@ -34,6 +36,11 @@ Route::get('/indexartikel',[ArtikelController::class,'indexartikel']);
 Route::get('/indexartikel1',[ArtikelController::class,'indexartikel1']);
 Route::get('/indexkomentar',[KomentarController::class,'indexkomentar']);
 Route::get('/indexuser',[UserController::class,'indexuser']);
+
+Route::get('/indexlike',[LikeController::class,'indexlike']);
+Route::post('/checklike',[LikeController::class,'checklike']);
+Route::post('/like',[LikeController::class,'like']);
+Route::post('/unlike',[LikeController::class,'unlike']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
