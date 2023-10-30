@@ -18,7 +18,10 @@ class KomentarController extends Controller
     public function index()
     {
         //get all kometars
-        $kometars = Komentar::latest()->join('users', 'komentars.iduser', '=', 'users.id')->select(['komentars.*', 'users.name'])->paginate(5);
+        $kometars = Komentar::latest()
+        ->join('artikels', 'komentars.idartikel', '=', 'artikels.id')
+        ->join('users', 'komentars.iduser', '=', 'users.id')
+        ->select(['komentars.*', 'users.name', 'artikels.judul'])->paginate(5);
 
         //return collection of kometars as a resource
         return new UkomResource(true, 'List Data Komentar', $kometars);
@@ -136,7 +139,8 @@ class KomentarController extends Controller
     public function indexkomentar()
     {
         //get all kometars
-        $kometars = Komentar::join('users', 'komentars.iduser', '=', 'users.id')->select(['komentars.*', 'users.name'])->get();
+        $kometars = Komentar::latest()->join('artikels', 'komentars.idartikel', '=', 'artikels.id')
+        ->join('users', 'komentars.iduser', '=', 'users.id')->select(['komentars.*', 'users.name'])->get();
 
         //return collection of kometars as a resource
         return new UkomResource(true, 'List Data Komentar', $kometars);

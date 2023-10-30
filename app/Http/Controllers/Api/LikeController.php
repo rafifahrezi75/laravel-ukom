@@ -18,7 +18,8 @@ class LikeController extends Controller
     public function indexLike()
     {
         //get all likes
-        $likes = Like::latest()->join('artikels', 'likes.idartikel', '=', 'artikels.id')
+        $likes = Like::latest()
+        ->join('artikels', 'likes.idartikel', '=', 'artikels.id')
         ->join('kategoris', 'artikels.idkategori', '=', 'kategoris.id')
         ->select(['likes.*', 'kategoris.kategori', 'artikels.image', 'artikels.judul',
         'artikels.tgl', 'artikels.penulis', 'artikels.status', 'artikels.para1', 'artikels.para2', 'artikels.para3', 'artikels.para4'])->get();

@@ -29,7 +29,7 @@ class LoginUserController extends Controller
         }
 
         //get credentials from request
-        $credentials = $request->only('email', 'password', 'role');
+        $credentials = $request->only('email', 'password');
 
         //if auth failed
         if(!$token = JWTAuth::attempt($credentials)) {
