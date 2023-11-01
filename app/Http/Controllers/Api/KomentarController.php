@@ -140,7 +140,7 @@ class KomentarController extends Controller
     {
         //get all kometars
         $kometars = Komentar::latest()->join('artikels', 'komentars.idartikel', '=', 'artikels.id')
-        ->join('users', 'komentars.iduser', '=', 'users.id')->select(['komentars.*', 'users.name'])->get();
+        ->join('users', 'komentars.iduser', '=', 'users.id')->select(['komentars.*', 'users.name', 'users.role'])->get();
 
         //return collection of kometars as a resource
         return new UkomResource(true, 'List Data Komentar', $kometars);

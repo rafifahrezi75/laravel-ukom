@@ -41,12 +41,12 @@ class LoginUserController extends Controller
 
         $user = auth()->user();
 
-        if ($user && $user->role === 'admin') {
-            return response()->json([
-                'success' => false,
-                'message' => 'Admin is not allowed to login through this endpoint.'
-            ], 403);
-        }
+        // if ($user && $user->role === 'admin') {
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => 'Admin is not allowed to login through this endpoint.'
+        //     ], 403);
+        // }
 
         //if auth success
         if ($user->isAdmin()) {
